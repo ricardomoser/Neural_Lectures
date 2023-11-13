@@ -1,1 +1,22 @@
+class WineClassifier(nn.Module):
+  def __init__(self, input_size, hidden_size, out_size):
+    super(WineClassifier, self).__init__()
 
+    self.hidden  = nn.Linear(input_size, hidden_size)
+    self.relu    = nn.ReLU()
+    self.out     = nn.Linear(hidden_size, out_size)
+    self.softmax = nn.Softmax()
+
+  def forward(self, X):
+
+    feature = self.relu(self.hidden(X))
+    output = self.softmax(self.out(feature))
+
+    return output
+
+
+input_size  = data.shape[1]
+hidden_size = 32
+out_size    = len(wine.target_names)
+
+net = WineClassifier(input_size, hidden_size, out_size).to(device) #Cast in GPU
