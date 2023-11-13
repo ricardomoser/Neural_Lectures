@@ -1,0 +1,27 @@
+import torch
+from torch import nn, optim
+
+from torchvision import datasets
+from torchvision import transforms 
+
+from torch.utils.data import DataLoader
+
+import matplotlib.pyplot as plt
+import numpy as np
+import time
+
+args = {
+    'batch_size': 5,
+    'num_workers': 4,
+    'num_classes': 10,
+    'lr': 1e-4,
+    'weight_decay': 5e-4,
+    'num_epochs': 30
+}
+
+if torch.cuda.is_available():
+  args['device'] = torch.device('cuda')
+else:
+  args['device'] = torch.device('cpu')
+
+print(args['device'])
